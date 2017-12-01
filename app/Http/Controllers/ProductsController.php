@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\products;
+use Session;
 
 class ProductsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        return view('products.index',['products'=>products::all() ]);
     }
 
     /**
@@ -23,7 +30,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -34,7 +41,26 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+           'name' => 'required',
+           'image' => 'required',
+           'price' => 'required',
+        ]);
+
+        $image = request()->image;
+        $imageNewName = time().'_'.$image->getClientOriginalName();
+        $image->move('products/', $imageNewName);
+
+        products::create([
+           'name' => request()->name,
+            'image' => 'products/'.$imageNewName,
+           'price' => request()->price,
+           'description' => request()->description
+        ]);
+
+        Session::flash('success', 'Se ha creado el producto');
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -56,7 +82,9 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = products::find($id);
+
+        return view('products.edit', ['product'=> $product]);
     }
 
     /**
@@ -68,7 +96,30 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = products::find($id);
+
+        $this->validate(request(), [
+            'name' => 'required',
+            'price' => 'required',
+        ]);
+
+        if (request()->hasFile('image')){
+            $image = request()->image;
+            $imageNewName = time().'_'.$image->getClientOriginalName();
+            $image->move('products/', $imageNewName);
+
+            $product->image = 'products/'. $imageNewName;
+        }
+
+        $product->name = request()->name;
+        $product->price = request()->price;
+        $product->description = request()->description;
+        $product->save();
+
+        Session::flash('success', 'Se ha editado el producto');
+
+        return redirect()->route('products.index');
+
     }
 
     /**
@@ -79,6 +130,17 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = products::find($id);
+
+        if (file_exists($product->image)){
+            unlink($product->image);
+        }
+
+        $product->delete();
+
+        Session::flash('success', 'Se ha eliminado el producto');
+
+        return redirect()->back();
+
     }
 }
