@@ -1,25 +1,25 @@
 @extends('layouts.frontend')
 
 @section('page')
-    <div class="container-fluid">
-        <div class="row medium-padding120 bg-border-color">
-            <div class="container">
+<div class="container-fluid">
+    <div class="row medium-padding120 bg-border-color">
+        <div class="container">
 
-                <div class="row">
+            <div class="row">
 
-                    <div class="col-lg-12">
-                        <div class="order">
-                            <h2 class="h1 order-title align-center">Your Order</h2>
-                            <form action="#" method="post" class="cart-main">
-                                <table class="shop_table cart">
-                                    <thead class="cart-product-wrap-title-main">
+                <div class="col-lg-12">
+                    <div class="order">
+                        <h2 class="h1 order-title align-center">Your Order</h2>
+                        <form action="#" method="post" class="cart-main">
+                            <table class="shop_table cart">
+                                <thead class="cart-product-wrap-title-main">
                                     <tr>
                                         <th class="product-thumbnail">Product</th>
                                         <th class="product-quantity">Quantity</th>
                                         <th class="product-subtotal">Total</th>
                                     </tr>
-                                    </thead>
-                                    <tbody>
+                                </thead>
+                                <tbody>
                                     @foreach(Cart::content() as $item)
 
                                     <tr class="cart_item">
@@ -46,49 +46,48 @@
                                         </td>
 
                                     </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
-                                <div class="cheque">
+                            <div class="cheque">
 
-                                    <div class="logos">
-                                        <a href="#" class="logos-item">
-                                            <img src="img/visa.png" alt="Visa">
-                                        </a>
-                                        <a href="#" class="logos-item">
-                                            <img src="img/mastercard.png" alt="MasterCard">
-                                        </a>
-                                        <a href="#" class="logos-item">
-                                            <img src="img/discover.png" alt="DISCOVER">
-                                        </a>
-                                        <a href="#" class="logos-item">
-                                            <img src="img/amex.png" alt="Amex">
-                                        </a>
+                                <div class="logos">
+                                    <a href="#" class="logos-item">
+                                        <img src="{{ asset('app/img/visa.png') }}" alt="Visa">
+                                    </a>
+                                    <a href="#" class="logos-item">
+                                        <img src="{{ asset('app/img/mastercard.png') }}" alt="MasterCard">
+                                    </a>
+                                    <a href="#" class="logos-item">
+                                        <img src="{{ asset('app/img/discover.png') }}" alt="DISCOVER">
+                                    </a>
+                                    <a href="#" class="logos-item">
+                                        <img src="{{ asset('app/img/amex.png') }}" alt="Amex">
+                                    </a>
 
-                                        <span style="float: right;">
-								<form action="/your-server-side-code" method="POST">
-									  <script
-                                              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                              data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
-                                              data-amount="999"
-                                              data-name="Stripe.com"
-                                              data-description="Widget"
-                                              data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                                              data-locale="auto"
-                                              data-zip-code="true">
-									  </script>
-								</form>
-							</span>
-                                    </div>
-                                </div>
+                                    <span style="float: right;">
+                                      <form action="/your-server-side-code" method="POST">
+                                          <script
+                                          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                          data-key="pk_test_2i7myZk5ExQVChHHNfYj40el"
+                                          data-amount="999"
+                                          data-name="Udemy E-commerce tutorial"
+                                          data-description="Widget"
+                                          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                          data-locale="auto">
+                                      </script>
+                                  </form>
+                              </span>
+                          </div>
+                      </div>
 
-                            </form>
-                        </div>
-                    </div>
+                  </form>
+              </div>
+          </div>
 
-                </div>
-            </div>
-        </div>
-    </div>
+      </div>
+  </div>
+</div>
+</div>
 @endsection

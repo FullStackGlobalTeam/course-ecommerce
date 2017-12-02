@@ -59,6 +59,12 @@ Route::get('/cart/checkout/', [
 
 ]);
 
+Route::post('/cart/checkout/', [
+    'uses' => 'CheckoutController@pay',
+    'as' => 'cart.checkout'
+
+]);
+
 Route::resource('products', 'ProductsController');
 
 

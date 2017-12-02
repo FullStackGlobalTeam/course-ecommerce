@@ -11,4 +11,11 @@ class CheckOutController extends Controller
 
         return view('checkout');
     }
+
+    public function pay()
+    {
+
+    	dd(request()->all());
+    }
+
 }
