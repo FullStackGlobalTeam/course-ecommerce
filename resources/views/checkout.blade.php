@@ -42,7 +42,7 @@
                                         </td>
 
                                         <td class="product-subtotal">
-                                            <h5 class="total amount">${{ $item->total() }}</h5>
+                                            <h5 class="total amount">${{ number_format($item->total()) }}</h5>
                                         </td>
 
                                     </tr>
@@ -72,7 +72,7 @@
                                           <script
                                           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                           data-key="pk_test_2i7myZk5ExQVChHHNfYj40el"
-                                          data-amount="999"
+                                          data-amount="{{ Cart::total() * 100 }}"
                                           data-name="Udemy E-commerce tutorial"
                                           data-description="Widget"
                                           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"

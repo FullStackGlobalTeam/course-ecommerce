@@ -26,7 +26,7 @@
     <!--External fonts-->
 
     <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-
+    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
 </head>
 
 
@@ -112,7 +112,17 @@
 <script src="{{ asset('app/js/animation.velocity.min.js') }}"></script>
 
 <!-- ...end JS Script -->
+<script src="{{ asset('js/toastr.min.js') }}"></script>
 
+<script>
+    @if(Session::has('success'))
+    toastr.success("{{ Session::get('success') }}")
+    @endif
+
+    @if(Session::has('info'))
+    toastr.info("{{ Session::get('info') }}")
+    @endif
+</script>
 
 </body>
 
