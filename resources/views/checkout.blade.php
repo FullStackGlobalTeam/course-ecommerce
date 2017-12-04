@@ -67,7 +67,8 @@
                                     </a>
 
                                     <span style="float: right;">
-                                      <form action="/your-server-side-code" method="POST">
+                                      <form action="{{ route('cart.checkout') }}" method="POST">
+                                          {{ csrf_field() }}
                                           <script
                                           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                           data-key="pk_test_2i7myZk5ExQVChHHNfYj40el"
